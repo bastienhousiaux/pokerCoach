@@ -38,8 +38,16 @@ var position="BB";
 var betSize=0,potSize=0,outs=0;
 
 function calculateOdds(){
-    var potOdds=betSize/potSize;
-    var 
+    // var potOdds=betSize/(potSize+betSize);
+    var flopOdds=outs/47+outs/46;
+    var turnOdds=outs/46;
+    var turnAllIn=outs/23;
+    $(("#txtOdds")).html(
+        "EV flop : " + (flopOdds*potSize-(1-flopOdds)*betSize) + "<br>" +
+        "EV turn : " + (turnOdds*potSize-(1-turnOdds)*betSize) + "<br>" +
+        "EV turn all in : " + (turnAllIn*potSize-(1-turnAllIn)*betSize) + "<br>"
+    );
+    //+((potOdds>outOdds)?"call":"fold"));
 }
 
 $(function(){
@@ -50,8 +58,11 @@ $(function(){
         }
         $("#pokerCoach").append("<br>");
     }
+    
 
     $("#pokerCoach").append("<p id='txtAction'></p>");
+    
+    $("#pokerCoach").append("<button id='btnReset'>reset</button>");
 
     $("#position").on("change",function(evt){
         position=$(this).val();
@@ -59,14 +70,17 @@ $(function(){
 
     $("#inpBetSize").change(function(evt){
         betSize=parseInt($(this).val());
+        calculateOdds();
+    });
+
+    $("#inpPotSize").change(function(evt){
+        potSize=parseInt($(this).val());
+        calculateOdds();
     });
 
     $("#inpOuts").change(function(evt){
         outs=parseInt($(this).val());
-    });
-
-    $("#inpOuts").change(function(evt){
-        betSize=parseInt($(this).val());
+        calculateOdds();
     });
 
     $(".cardButton").on("click",function(evt){
@@ -80,5 +94,13 @@ $(function(){
         }
             
         $(evt.target).prop("disabled",true);
-    })
+    });
+
+    $("#btnReset").on("click",function(){
+        $("#inpBetSize, #inpPotSize, #inpOuts").val("");
+        $("#txtAction, #txtOdds").html("");
+        $(".cardButton").prop("disabled",false);
+        betSize=potSize=outs=0;
+        game=[];
+    });
 });
