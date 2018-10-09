@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="lib/jquery.min.js"></script>
+    <script src="strats/holdempokertrainer.js"></script>
+    <script src="main.js"></script>
+</head>
+<body>
+    <div id="pokerCoach">
+        <select id="position" >
+            <option value="UTG">UTG</option>
+            <option value="MP">MP</option>
+            <option value="CO">CO</option>
+            <option value="BUT">BUT</option>
+            <option value="SB">SB</option>
+            <option value="BB">BB</option>
+        </select><br>
+        <label for="inpBetSize">bet size : </label><input type="text"id="inpBetSize"/><br>
+        <label for="inpPotSize">pot size : </label><input type="text"id="inpPotSize"/><br>
+        <label for="inpOuts">outs : </label><input type="text"id="inpOuts"/><br>
+        <p id="txtOdds"></p>
+    </div>
+</body>
+</html>
